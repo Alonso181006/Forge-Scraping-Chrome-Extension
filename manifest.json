@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Forge Chrome Extension",
+  "version": "1.0",
+  "description": "Copies Data from all Revenue Vessel Tabs Open",
+  "permissions": ["scripting", "clipboardWrite", "tabs"],
+  "icons": {
+  "128": "forge_marketplace_logo.png"
+},
+  "content_scripts": [
+    {
+      "matches": ["https://app.revenuevessel.com/*", "https://www.linkedin.com/*"],
+      "js": ["content.js"]
+    }
+  ], 
+  "background": {
+    "service_worker": "background.js"
+  }, 
+  "action": {
+    "default_icon": "forge_marketplace_logo.png"
+  }
+}
