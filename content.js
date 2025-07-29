@@ -96,7 +96,7 @@ function scrapeRevVessel() {
 // If Chrome Extension Clicked
 chrome.runtime.onMessage.addListener(gotMessage);
 
-function gotMessage(message, sender){
+function gotMessage(message){
   if (message.url.includes("linkedin.com")) {
     console.log("button pressed");
     scrapeLinkedIn();
@@ -107,13 +107,14 @@ function gotMessage(message, sender){
       copyRevVesselData(totalList);
     } else {
       console.log("It is not an array")
-      copyRevVesselData(message.data.infoData );
+      copyRevVesselData(message.data.infoData);
 
     }
   }
 }
 
 function copyRevVesselData(data) {
+  console.log("Data on clipboard")
   navigator.clipboard.writeText(data);
 }
 
@@ -158,7 +159,7 @@ function scrapeLinkedIn() {
     })
     .map(({ name, title, link }) => `${name}\t${title}\t${link}`)
     // .join('\n');
-
+    
     chrome.runtime.sendMessage({request: "StoreLinkedInData", data: output});
     console.log("sent message");
 }
