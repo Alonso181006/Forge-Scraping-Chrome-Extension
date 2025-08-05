@@ -17,7 +17,7 @@ function buttonClicked(tab) {
         chrome.tabs.sendMessage(tab.id, msg);
     } else {
         copyData.infoData = "";
-        copyData.infoData = null;
+        copyData.linkedInList = null;
         console.log("data .reset")
     }
 }
@@ -27,7 +27,7 @@ function messageResponse(message, sender, sendResponse) {
         sendResponse(sender.tab.url);
     } else if (message.request === "StoreLinkedInData"){
         console.log(message.data.join('\n') + "was stored")
-        copyData.linkedInList = message.data;
+        copyData.linkedInList = message.data + copyData.linkedInList;
     }else if (message.request == "StoreRevVesselData") {
         if (copyData.linkedInList) {
             copyData.linkedInList = copyData.linkedInList.filter(person => {
